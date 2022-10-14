@@ -1,0 +1,7 @@
+#Google Drive desktop.ini files
+desktop.ini
+*.ini
+
+#folders not required
+target/**
+
