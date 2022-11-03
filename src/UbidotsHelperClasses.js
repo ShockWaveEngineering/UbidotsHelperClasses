@@ -168,10 +168,10 @@
          // Implements the socket connection
          this.socket.on('connect', function()
          {
-             _localRef.socket.emit('authentication', {token: this.token});
+             _localRef.socket.emit('authentication', {token: _localRef.token});
          });
          window.addEventListener('online', function () {
-             _localRef.socket.emit('authentication', {token: this.token});
+             _localRef.socket.emit('authentication', {token: _localRef.token});
          });		
          this.socket.on('authenticated', function(){
              console.log("#onAuthenticated()");
