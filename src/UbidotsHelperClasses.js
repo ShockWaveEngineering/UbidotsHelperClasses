@@ -45,7 +45,7 @@
          const _variableApiId = this.deviceInfo[variableApiLabel].id;
  
          //construct the context
-         const _context = "{}";
+         var _context = "{}";
          if(context != null && context != undefined && context != "")
          {
              _context = context;
