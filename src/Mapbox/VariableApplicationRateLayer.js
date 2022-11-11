@@ -259,10 +259,18 @@ class VariableApplicationRateLayer
 			"id": this.fillLayerName,
 			"type": "fill",
 			"source": this.sourceName,
-			"layout": {},
+			"filter": ["has", "application"], //this makes sure our source has the properties we need
 			"paint": {
-				"fill-color": "blue",
-				"fill-opacity": 0.3
+				"fill-color": [
+					"step",
+					["get", "application"],
+					"red",
+					0,
+					"orange",
+					0.00001,
+					"blue"
+				],
+				"fill-opacity": 0.4
 			}
 		});
 
@@ -271,9 +279,17 @@ class VariableApplicationRateLayer
 			"id": this.outlineLayerName,
 			"type": "line",
 			"source": this.sourceName,
-			"layout": {},
+			"filter": ["has", "application"],
 			"paint": {
-				"line-color": "#00146c",
+				"line-color": [
+					"step",
+					["get", "application"],
+					"red",
+					0,
+					"orange",
+					0.00001,
+					"blue"
+				],
 				"line-width": 1
 			}
 		});
