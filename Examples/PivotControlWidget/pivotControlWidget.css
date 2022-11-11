@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css?family=Sora');
+
+*{
+    font-family: "Sora";
+}
+
+:root {
+  --color1: #000000;
+  --color2: #FFFFFF;
+  --color3: #7AB800;
+  --color4: #B8B8B8;
+  --color5: #949494;
+  --color6: #555555;
+  --color_disabled: #EEEEEE;
+  --indicator_size: 80px;
+  --indicator_size_small: 40px;
+  --indicator_text_size: 12px;
+}
+
+
+html {
+  background: var(--color2);
+  /*width: 512px;*/
+}
+
+header {
+  background-color: var(--color2);
+  color: var(--color1);
+  text-align: left;
+  font-family: "Sora";
+  font-size: 18px;
+  padding: 5px;
+}
+
+.panel_line {
+  /*border: 2px solid black;*/
+  height: 90px;
+  background-color: var(--color2);
+}
+
+.control_and_monitoring--container {
+  background: var(--color2);
+  margin: 0px;
+  /*min-width: 400px;*/
+  width: 512px;
+
+}
+
+.button {
+  float: left;
+  margin-left: 5px;
+  margin-top: 5px;
+  /*border: 1px solid darkgray;*/
+  outline: none;
+  border: none;
+  border-radius: 7px;
+  background-color: var(--color4);
+
+  color: var(--color1);
+  text-align: center;
+  font-size: var(--indicator_text_size);
+  font-family: "Sora";
+
+  width: var(--indicator_size);
+  height: var(--indicator_size);
+  box-shadow: 1px 6px #666666;
+  
+}
+
+.indicator {
+  float: left;
+  margin-left: 5px;
+  margin-top: 5px;
+  /*border: 2px solid black;*/
+  border-radius: calc(var(--indicator_size)/2);
+  background-color: var(--color4);
+
+  color: var(--color1);
+  font-family: "Sora";
+  text-align: center;
+  font-size: var(--indicator_text_size);
+  padding-top: calc((var(--indicator_size) - var(--indicator_text_size))/2);
+
+  width: var(--indicator_size);
+  height: var(--indicator_size);
+  box-sizing: border-box;
+  
+  /*box-shadow: 0px 0px 5px 0px grey inset;*/
+}
+
+.indicator_text {
+  float: left;
+  margin: 5px;
+
+  border-radius: calc(var(--indicator_size)/4);
+  background-color: var(--color4);
+
+  text-align: center;
+  font-size: var(--indicator_text_size);
+  padding-left: 10px;
+  padding-top: calc((var(--indicator_size)/2 - var(--indicator_text_size))/2);
+  font-family: "Sora";
+
+  width: 120px;
+  height: 40px;
+  box-sizing: border-box;
+}
+
+.thin_panel_line {
+  height: 50px;
+  background-color: var(--color2);
+}
+
+#indicator_opmode 
+{
+  width: 250px;
+  height: 40px;
+  
+  float: left;
+  margin-left: 5px;
+  margin-top: 5px;
+
+  background-color: var(--color4);
+
+  color: white;
+  font-family: "Sora";
+  text-align: center;
+  
+  padding-top: 9px;
+  font-size: calc(var(--indicator_text_size) +2);
+  border-radius: calc(var(--indicator_size)/8);
+  box-sizing: border-box;
+}
+
+.horizontal {
+  float: left;
+  display: inline-block;
+  zoom: 1;
+  vertical-align: top;
+  /*margin:  5px;*/
+}
+
+.vertical {
+  float: top;
+  display: inline-block;
+  zoom: 1;
+  vertical-align: top;
+  /*margin:  5px;*/
+}
+
+#input_fixed_application_rate {
+  margin: 5px;
+  width: 120px;
+  height: 40px;
+  box-sizing: border-box;
+  font-size: 18;
+
+}
+
+p {
+  padding-top: 2px;
+  text-align: center;
+  width: 120px;
+  height: 20px;
+  /*background-color: var(--color4);*/
+  margin: 5px;
+  font-size: var(--indicator_text_size);
+  font-family: "Sora";
+  box-sizing: border-box;
+}
+
+#map
+{
+	position: relative;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	padding-bottom: 100%;	
+}

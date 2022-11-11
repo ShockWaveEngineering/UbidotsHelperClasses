@@ -1,0 +1,90 @@
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script src='https://iot.cdnedge.bluemix.net/ind/static/js/libs/socket.io/socket.io.min.js'></script>
+
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+<script src='https://unpkg.com/@turf/turf/turf.min.js'></script>
+
+<script src='https://cdn.jsdelivr.net/gh/ShockWaveEngineering/UbidotsHelperClasses@0.0.12/src/UbidotsDevice.js'>
+</script>
+<script src='https://cdn.jsdelivr.net/gh/ShockWaveEngineering/UbidotsHelperClasses@0.0.12/src/HtmlElements.js'>
+</script>
+<script src='https://cdn.jsdelivr.net/gh/ShockWaveEngineering/UbidotsHelperClasses@0.0.12/src/UbidotsVariable.js'>
+</script>
+<script src='https://cdn.jsdelivr.net/gh/ShockWaveEngineering/UbidotsHelperClasses@0.0.12/src/Mapbox/PivotMapScaler.js'>
+</script>
+<script
+	src='https://cdn.jsdelivr.net/gh/ShockWaveEngineering/UbidotsHelperClasses@0.0.12/src/Mapbox/RealtimePivotLayer.js'>
+</script>
+<script
+	src='https://cdn.jsdelivr.net/gh/ShockWaveEngineering/UbidotsHelperClasses@0.0.12/src/Mapbox/VariableApplicationRateLayer.js'>
+</script>
+<script
+	src='https://cdn.jsdelivr.net/gh/ShockWaveEngineering/UbidotsHelperClasses@0.0.12/src/Mapbox/VirtualEndStopLayer.js'>
+</script>
+
+
+
+
+<html>
+
+<div class="control_and_monitoring--container">
+
+	<header id="system_name">System Name: NONE</header>
+
+	<div class="thin_panel_line">
+		<div id="indicator_opmode">Opmode</div>
+	</div>
+
+	<div class="panel_line">
+		<div class="indicator" id="indicator_on">On</div>
+		<div class="indicator" id="indicator_safety">Safety</div>
+		<div class="indicator" id="indicator_pp_pumprun">Pumprun</div>
+	</div>
+
+	<div class="panel_line">
+		<button type="button" class="button" id="button_start">Start</button>
+		<div class="indicator" id="indicator_startlatch">Start Latch</div>
+		<button type="button" class="button" id="button_stop">Stop</button>
+	</div>
+
+	<div class="panel_line">
+		<button type="button" class="button" id="button_reverse">Select Reverse</button>
+		<button type="button" class="button" id="switch_dry_wet">Select Wet/Dry</button>
+		<button type="button" class="button" id="button_forward">Select Forward</button>
+	</div>
+
+	<div class="panel_line">
+		<div class="indicator" id="indicator_reverse">Reverse</div>
+		<div class="indicator" id="indicator_dry_wet">Wet/Dry</div>
+		<div class="indicator" id="indicator_forward">Forward</div>
+	</div>
+
+	<!-- Application Input and resulting duty cycle % -->
+	<div class="panel_line">
+		<div class="horizontal">
+			<p>Fixed Application Rate [mm]</p>
+			<input type="text" size="50%" id="input_fixed_application_rate" />
+      	</div>
+			<div class="horizontal">
+				<p>Speed %</p>
+				<div class="indicator_text" id="indicator_runspeed">XX%</div>
+			</div>
+		</div>
+
+		<!-- Indicators for maximum and minimum application -->
+		<div class="thin_panel_line">
+			<div id="indicator_minimum_application">Minimum Application: X.Xmm</div>
+			<div id="indicator_maximum_application">Maximum Application: X.Xmm</div>
+
+		</div>
+		<!-- Information for map and map -->
+		<div id="pivot_bearing">Pivot Bearing: XX.XX degrees</div>
+		<div id="end_pos_last_timestamp">Coordinate age: XXh XXm XXs</div>
+		
+
+	</div>
+	<!-- Map Section -->
+	<div id='map' style="touch-action: none"></div>
+
+</html>
