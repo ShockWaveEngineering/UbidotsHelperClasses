@@ -156,7 +156,7 @@ class Button
         //console.log(`onVariableUpdated() -> event.detail: ${JSON.stringify(event.detail)}`);
         //console.log(`this.variableApiLabel: ${this.variableApiLabel}`);
         const value = event.detail.value;
-        console.log(`value: ${value}`);
+        //console.log(`value: ${value}`);
         this.updateVisuals(value);
     }
 
