@@ -300,7 +300,7 @@ class VirtualEndStopLayer
 
 		// line
 		let _lineSourceData = this.getLineSourceData();
-		map.addSource(this.lineSourceName, 
+		this.mapObject.addSource(this.lineSourceName, 
 		{
 			'type': 'geojson',
 			'data': _lineSourceData
