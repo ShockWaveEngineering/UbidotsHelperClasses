@@ -158,7 +158,10 @@ class UbidotsDevice extends EventTarget
                 
         this.#connectSocket();
         // Should try to connect again if connection is lost
-        this.socket.on('reconnect', this.#connectSocket);
+        const _localRef = this;
+        this.socket.on('reconnect', function () {
+            _localRef.#connectSocket();
+        });
     }
     #connectSocket()
     {
