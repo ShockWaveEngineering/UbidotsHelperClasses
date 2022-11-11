@@ -193,7 +193,7 @@ class UbidotsDevice extends EventTarget
             //test if it exists
             if(_variableObject == null || _variableObject == undefined)
             {
-                console.error("#subscribeToRealtimeVariables() => this.subscribedVariableApiLabels contains label that device does not have");
+                console.error(`#subscribeToRealtimeVariables() => cannot find API ID for API label: ${_variableApiLabel}`);
                 continue;
             }
             //console.log(JSON.stringify(_variableObject));
