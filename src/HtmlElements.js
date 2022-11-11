@@ -146,8 +146,6 @@ class Button
     {
         //console.log(`onPointerUp() -> event.detail: ${JSON.stringify(event.detail)}`);
         this.state = !this.state | 0; //so that the state stays a number
-
-
         this.updateVisuals(this.state);
         this.ubidotsDeviceObject.publish(this.variableApiLabel, this.state, "");
     }
@@ -155,7 +153,7 @@ class Button
     //event handler for when ubidots updates our variable
     onVariableUpdated(event)
     {
-        console.log(`onVariableUpdated() -> event.detail: ${JSON.stringify(event.detail)}`);
+        //console.log(`onVariableUpdated() -> event.detail: ${JSON.stringify(event.detail)}`);
         //console.log(`this.variableApiLabel: ${this.variableApiLabel}`);
         const value = event.detail.value;
         console.log(`value: ${value}`);
@@ -165,7 +163,7 @@ class Button
     //called when you want to update the look of the element based on the value received from ubidots
     updateVisuals(value)
     {
-        console.log(`updateVisuals(${value})`);
+        //console.log(`updateVisuals(${value})`);
         let element = document.getElementById(this.elementId);
 
         if(value == 1)
@@ -284,7 +282,7 @@ class NumberInput
     onChange(event)
     {
         //console.log(`onPointerUp() -> event.detail: ${JSON.stringify(event.detail)}`);
-        console.log("NumberInput value: " + event.target.value);
+        //console.log("NumberInput value: " + event.target.value);
         this.state = event.target.value;
         this.updateVisuals(this.state);
         this.ubidotsDeviceObject.publish(this.variableApiLabel, this.state, ""); // Publish value to ubidots
