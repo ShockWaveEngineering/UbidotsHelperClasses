@@ -164,7 +164,7 @@ class VirtualEndStopLayer
 		//publish the new endstop bearing
 		let _context = {
 			enabled: true,
-			action: "bounce"
+			action: "stop"
 		};
 		this.endStopBearingVariable.updateUbidotsVariable(_mouseBearing, JSON.stringify(_context));
 
