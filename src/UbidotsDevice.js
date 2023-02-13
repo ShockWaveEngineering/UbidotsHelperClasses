@@ -103,8 +103,8 @@ class UbidotsDevice extends EventTarget
         $.get(url, { token: this.token}, function (res) 
         {        
             var _obj = JSON.parse(JSON.stringify(res));
-            //console.log("JSON.stringify(res): " + JSON.stringify(res));	
-            //console.log("obj.results count:" + obj.results.length);
+            console.log("JSON.stringify(res): " + JSON.stringify(res));	
+            console.log("obj.results count:" + obj.results.length);
             _localRef.#updateDeviceInfo(_obj);
         });
     }
@@ -114,7 +114,7 @@ class UbidotsDevice extends EventTarget
         var _count = rawData.results.length;
         for (let i = 0; i < rawData.count; i++)
         {
-            //console.log("result: " + JSON.stringify(rawData.results[i]));
+            console.log("result: " + JSON.stringify(rawData.results[i]));
 
             this.deviceInfo[rawData.results[i].label] = {
                 label:rawData.results[i].label,
@@ -125,7 +125,7 @@ class UbidotsDevice extends EventTarget
                 created_at:rawData.results[i].lastValue.created_at
             };			
         }
-        //console.log("deviceInfo: " + JSON.stringify(this.deviceInfo));
+        console.log("deviceInfo: " + JSON.stringify(this.deviceInfo));
 
         //start the realtime connection
         this.#initialiseRealtimeConnection();
