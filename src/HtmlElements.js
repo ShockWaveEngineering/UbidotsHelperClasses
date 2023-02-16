@@ -203,19 +203,65 @@ class Switch
         });
 
         //initialise element
-        this.state = 0;
+        this.lowValue = 0;
+        this.highValue = 1;        
+        this.state = this.lowValue;
         this.releasedColor = releasedColor;
         this.pressedColor = pressedColor;
         this.releasedText = releasedText;
         this.pressedText = pressedText;
         this.updateVisuals(this.state);
     }
+    
+    constructor(elementId, variableApiLabel, ubidotsDeviceObject, releasedColor, pressedColor, releasedText, pressedText, lowValue, highValue)
+    {
+        this.elementId = elementId; //the id of the element that will show the status of the indicator
+        this.variableApiLabel = variableApiLabel;
+        this.ubidotsDeviceObject = ubidotsDeviceObject; //Object used for receiving and sending data		
+
+        const _localRef = this;
+        //subscribe to updates
+        this.ubidotsDeviceObject.addEventListener(this.variableApiLabel, function(event){
+            _localRef.onVariableUpdated(event);
+            });
+
+        //(this is an agnostic event so it can be used with both a mouse and a touch screen)
+        let element = document.getElementById(this.elementId);
+        element.addEventListener('pointerup', (event) => {
+            _localRef.onPointerUp(event);
+        });
+
+        //initialise element
+        this.lowValue = lowValue;
+        this.highValue = highValue;        
+        this.state = this.lowValue;
+        this.releasedColor = releasedColor;
+        this.pressedColor = pressedColor;
+        this.releasedText = releasedText;
+        this.pressedText = pressedText;
+        this.updateVisuals(this.state);
+    }
+    
 
     //User input callbacks
     onPointerUp(event)
     {
         //console.log(`onPointerUp() -> event.detail: ${JSON.stringify(event.detail)}`);
-        this.state = !this.state | 0; //so that the state stays a number
+        if(this.state == this.lowValue)
+        {
+            this.state = this.highValue;
+        }
+        else
+        {
+            this.state = this.lowValue;
+        }
+        
+        if(!(typeof this.state === typeof Number))
+        {
+            console.error("lowValue or highValue isn't a number for elementId: " + this.elementId + " for ubidots varaible name: " + this.variableApiLabel);
+            return;
+        }
+        
         this.updateVisuals(this.state);
         this.ubidotsDeviceObject.publish(this.variableApiLabel, this.state, "");
     }
@@ -236,14 +282,14 @@ class Switch
         //console.log(`updateVisuals(${value})`);
         let element = document.getElementById(this.elementId);
 
-        if(value == 1)
+        if(value == this.highValue)
         {
             element.innerHTML = this.pressedText;
             element.style.backgroundColor = this.pressedColor;
             element.style.transform = "translate(0px, 4px)";			
             element.style.boxShadow = "1px 2px #333333";
         }
-        else if(value == 0)
+        else if(value == this.lowValue)
         {
             element.innerHTML = this.releasedText;
             element.style.backgroundColor = this.releasedColor;
