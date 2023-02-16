@@ -183,37 +183,8 @@ class Button
 
 //Simple Switch
 class Switch
-{
-    constructor(elementId, variableApiLabel, ubidotsDeviceObject, releasedColor, pressedColor, releasedText, pressedText)
-    {
-        this.elementId = elementId; //the id of the element that will show the status of the indicator
-        this.variableApiLabel = variableApiLabel;
-        this.ubidotsDeviceObject = ubidotsDeviceObject; //Object used for receiving and sending data		
-
-        const _localRef = this;
-        //subscribe to updates
-        this.ubidotsDeviceObject.addEventListener(this.variableApiLabel, function(event){
-            _localRef.onVariableUpdated(event);
-            });
-
-        //(this is an agnostic event so it can be used with both a mouse and a touch screen)
-        let element = document.getElementById(this.elementId);
-        element.addEventListener('pointerup', (event) => {
-            _localRef.onPointerUp(event);
-        });
-
-        //initialise element
-        this.lowValue = 0;
-        this.highValue = 1;        
-        this.state = this.lowValue;
-        this.releasedColor = releasedColor;
-        this.pressedColor = pressedColor;
-        this.releasedText = releasedText;
-        this.pressedText = pressedText;
-        this.updateVisuals(this.state);
-    }
-    
-    constructor(elementId, variableApiLabel, ubidotsDeviceObject, releasedColor, pressedColor, releasedText, pressedText, lowValue, highValue)
+{    
+    constructor(elementId, variableApiLabel, ubidotsDeviceObject, releasedColor, pressedColor, releasedText, pressedText, lowValue=0, highValue=1)//do default values work?
     {
         this.elementId = elementId; //the id of the element that will show the status of the indicator
         this.variableApiLabel = variableApiLabel;
@@ -233,7 +204,7 @@ class Switch
 
         //initialise element
         this.lowValue = lowValue;
-        this.highValue = highValue;        
+        this.highValue = highValue;
         this.state = this.lowValue;
         this.releasedColor = releasedColor;
         this.pressedColor = pressedColor;
