@@ -227,7 +227,7 @@ class Switch
             this.state = this.lowValue;
         }
         
-        if(!(typeof this.state === typeof Number))
+        if(!(isNumber(this.state)))
         {
             console.error("lowValue or highValue isn't a number for elementId: " + this.elementId + " for ubidots varaible name: " + this.variableApiLabel);
             return;
