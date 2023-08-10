@@ -322,3 +322,90 @@ class NumberInput
         element.value = value;
     }
 }
+
+class Dropdown
+{    
+    constructor(elementId, variableApiLabel, ubidotsDeviceObject, dropdownProfile)
+    {
+        this.elementId = elementId; //the id of the element that will show the status of the indicator
+        this.variableApiLabel = variableApiLabel;
+        this.ubidotsDeviceObject = ubidotsDeviceObject; //Object used for receiving and sending data		
+
+        const _localRef = this;
+        //subscribe to updates
+        this.ubidotsDeviceObject.addEventListener(this.variableApiLabel, function(event){
+            _localRef.onVariableUpdated(event);
+            });
+
+        //(this is an agnostic event so it can be used with both a mouse and a touch screen)
+        let element = document.getElementById(this.elementId);
+        element.addEventListener('change', (event) => {
+            _localRef.onDropdownChange(event);
+        });
+
+        //initialise class variables
+		this.dropdownProfile = dropdownProfile;
+		//initialise element
+		this.initialiseDropdownOptions(this.dropdownProfile);
+        this.updateVisuals(0);
+    }
+    
+	onDropdownChange(event)
+	{
+		console.log(`onDropdownChange: ${JSON.stringify(event.detail)}`);
+
+		//get the index of the text selected from the dropdown profile
+		let dropdown = document.getElementById(this.elementId);
+		//upload that index
+		this.ubidotsDeviceObject.publish(this.variableApiLabel, dropdown.value, "");
+	}
+
+    //event handler for when ubidots updates our variable
+    onVariableUpdated(event)
+    {
+        console.log(this.elementId + ` -> onVariableUpdated() -> event.detail: ${JSON.stringify(event.detail)}`);
+        //console.log(`this.variableApiLabel: ${this.variableApiLabel}`);
+        const value = event.detail.value;
+        //this.state = event.detail.value;
+        //console.log(`value: ${value}`);
+        this.updateVisuals(value);
+    }
+
+    //called when you want to update the look of the element based on the value received from ubidots
+    updateVisuals(value)
+    {
+        console.log(`updateVisuals(${value})`);
+		let dropdown = document.getElementById(this.elementId);
+
+		/*let _text = this.dropdownProfile[value].text;
+        let _color = this.dropdownProfile[value].color;
+		console.log(`_text(${_text})`);
+		console.log(`_color(${_color})`);*/
+
+        dropdown.value = value;
+    }
+
+	initialiseDropdownOptions(dropdownProfile)
+	{
+		//console.log(`initialiseDropdownOptions() -> ${JSON.stringify(dropdownProfile)}`);
+
+		let dropdownElement = document.getElementById(this.elementId);
+
+		for (const key in dropdownProfile)
+		{
+			if (dropdownProfile.hasOwnProperty(key))
+			{
+				const item = dropdownProfile[key];
+				//console.log(`Key: ${key}, Text: ${item.text}, Color: ${item.color}`);
+
+				//add items to dropdown element
+				const option = document.createElement('option');
+				option.value = key;
+				option.text = dropdownProfile[key].text;
+				//option.style.backgroundColor = dropdownProfile[key].color;
+				dropdownElement.appendChild(option);
+
+			}
+		}
+	}
+}
